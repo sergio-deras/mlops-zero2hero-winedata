@@ -13,21 +13,21 @@ This repository demonstrates TBD
     pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt
 
-dvc install
+3. Init DVC
+    dvc init (might need to force)
 
-dvc init (might need to force)
+4. You can get some data from:
+    https://archive.ics.uci.edu/dataset/186/wine+quality
 
-https://archive.ics.uci.edu/dataset/186/wine+quality
+5. You need to create your S3 bucket and configure AWS CLI access 
 
-dvc add data/winequality-red.csv
+6. dvc add data/winequality-red.csv 
+    A .dvc file is created, this is the one that will be in Git
 
-3. Train the model:
-    python train.py
+7. Configure your remote repo
+    dvc remote add -d mlops-zero2hero s3://mlops-zero2hero-dvc-bucket
 
-4. Run a single prediction from CLI:
-    python run_model.py --input "[5.1, 3.5, 1.4, 0.2]"
+8. Push your changes
+    dvc push
 
-5. Start the API:
-    python src/app.py
-   Then test:
-    curl -X POST "http://127.0.0.1:5000/predict" -H "Content-Type: application/json" -d '{"features":[5.1,3.5,1.4,0.2]}'
+These are not configured as versions, these are saved in different folders (diff objects)
